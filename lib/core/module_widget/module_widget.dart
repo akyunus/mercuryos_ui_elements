@@ -14,7 +14,7 @@ class ModuleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      width: MediaQuery.of(context).size.width * 0.4,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
           color: DefaultColorTheme.moduleBackgroundColor,
