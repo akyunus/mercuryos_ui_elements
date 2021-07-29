@@ -12,4 +12,5 @@ class DefaultColorTheme {
   static const locusTextColor = Color(0xFF333333);
   static const locusSecondaryTextColor = Color(0xFFAAAAAA);
   static const secondaryTextColor = Color(0xFF7B8086);
+  static const spaceCardBackgroundColor = Color(0xFFDCDADC);
 }
