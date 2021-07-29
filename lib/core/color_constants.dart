@@ -8,6 +8,7 @@ class DefaultColorTheme {
   static const moduleSecondaryTextColor = Color(0xFFAAAAAA);
   static const moduleButtonColor = Color(0xFFDFDFDF);
   static const locusBackgroundColor = Color(0xFFEEEFF0);
+  static const locusBackgroundColordark = Color(0xFFBEC1C6);
   static const locusTextColor = Color(0xFF333333);
   static const locusSecondaryTextColor = Color(0xFFAAAAAA);
   static const secondaryTextColor = Color(0xFF7B8086);

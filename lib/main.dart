@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mercuryos_ui_elements/core/flow/mercury_flow.dart';
-import 'package:mercuryos_ui_elements/core/kiri/kiri.dart';
-import 'package:mercuryos_ui_elements/core/space/space.dart';
+import 'package:mercuryos_ui_elements/screens/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MercuryOSApp());
 }
 
-class MyApp extends StatelessWidget {
+class MercuryOSApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mercury Os UI Elements',
       theme: ThemeData(fontFamily: 'Raleway'),
-      home: Kiri(
-        child: Space(
-          flows: <Widget>[
-            MercuryFlow(),
-          ],
-        ),
-      ),
+      home: HomeScreen(),
     );
   }
 }
