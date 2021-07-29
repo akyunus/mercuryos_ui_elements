@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mercuryos_ui_elements/core/color_constants.dart';
 
 class Kiri extends StatelessWidget {
   final Widget? child;
@@ -14,12 +15,50 @@ class Kiri extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: kiriDecorationBackgroundImage,
-        child: child,
-      ),
-    );
+        backgroundColor: Colors.transparent,
+        body: Stack(children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: kiriDecorationBackgroundImage,
+          ),
+          Positioned(
+            bottom: -30,
+            left: 0,
+            right: 0,
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+              width: 60,
+              height: 60,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                //textBaseline: TextBaseline.ideographic,
+                children: [
+                  Text.rich(
+                    TextSpan(
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: DefaultColorTheme.secondaryTextColor,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          child: Icon(
+                            Icons.arrow_downward,
+                            color: DefaultColorTheme.secondaryTextColor,
+                            //size: 25,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Activity Timeline',
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ]));
   }
 }
 

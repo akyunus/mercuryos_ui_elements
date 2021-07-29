@@ -13,12 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mercury Os UI Elements',
+      theme: ThemeData(fontFamily: 'Raleway'),
       home: Kiri(
         child: Space(
-          children: <Widget>[
-            ModuleWidget(),
-            ModuleWidget(),
-            ModuleWidget(),
+          flows: <Widget>[
             ModuleWidget(),
           ],
         ),

@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:mercuryos_ui_elements/core/color_constants.dart';
 import 'package:mercuryos_ui_elements/core/locus_bar/locus_bar.dart';
 
-class ModuleWidget extends StatelessWidget {
+class MercuryModule extends StatelessWidget {
   final locusBar;
   final child;
-  const ModuleWidget({
+  const MercuryModule({
     Key? key,
     this.locusBar,
     this.child,
