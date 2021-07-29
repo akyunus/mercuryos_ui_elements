@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mercuryos_ui_elements/core/flow/mercury_flow.dart';
 import 'package:mercuryos_ui_elements/core/kiri/kiri.dart';
-import 'package:mercuryos_ui_elements/core/module_widget/module_widget.dart';
 import 'package:mercuryos_ui_elements/core/space/space.dart';
 
 void main() {
@@ -13,13 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mercury Os UI Elements',
+      theme: ThemeData(fontFamily: 'Raleway'),
       home: Kiri(
         child: Space(
-          children: <Widget>[
-            ModuleWidget(),
-            ModuleWidget(),
-            ModuleWidget(),
-            ModuleWidget(),
+          flows: <Widget>[
+            MercuryFlow(),
           ],
         ),
       ),
