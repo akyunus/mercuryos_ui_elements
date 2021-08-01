@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mercuryos_ui_elements/core/color_constants.dart';
 import 'package:mercuryos_ui_elements/core/kiri/kiri_screen.dart';
 import 'package:mercuryos_ui_elements/core/locus_bar/locus_bar.dart';
+import 'package:mercuryos_ui_elements/core/space/space_timeline_card.dart';
 
 class ActivityTimelineScreen extends StatelessWidget {
   @override
@@ -14,8 +15,64 @@ class ActivityTimelineScreen extends StatelessWidget {
         Positioned(
           top: 50,
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: activities.map((a) {
+                  return Container(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: _activitiesRowBuilder(context, a));
+                }).toList(),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _activitiesRowBuilder(
+      BuildContext context, ActivityDTO dailyActivity) {
+    //final dailyActivity = activities[i];
+    return Container(
+      //height: MediaQuery.of(context).size.height * 0.4,
+      child: Column(
+        children: [
+          Text(
+            dailyActivity.day,
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: dailyActivity.activities.map((e) {
+              return _spaceCardBuilder(context, e);
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _spaceCardBuilder(BuildContext context, SpaceCardDTO item) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.50,
+      child: SpaceTimelineCard(
+        lastUpdated: item.lastUpdated,
+        spaceName: item.spaceName,
+        subInfo: item.subInfo,
+        moduleIcons: item.moduleIcons,
+      ),
+    );
+  }
+}
+
+/*Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -28,10 +85,16 @@ class ActivityTimelineScreen extends StatelessWidget {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.45,
-                  height: 300,
-                  decoration: BoxDecoration(
-                      color: DefaultColorTheme.spaceCardBackgroundColor,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: SpaceTimelineCard(
+                    lastUpdated: 'Updated just now',
+                    spaceName: 'Review Inbox',
+                    subInfo: '7 items from Mail, Messenger and Twitter',
+                    moduleIcons: [
+                      Icon(Icons.mail_outline),
+                      Icon(Icons.messenger_rounded),
+                      Icon(Icons.flaky_sharp),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -43,9 +106,28 @@ class ActivityTimelineScreen extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
+                ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, i) {
+                    final item = yesterdaySpaces[i];
+                    return Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: SpaceTimelineCard(
+                        lastUpdated: item.lastUpdated,
+                        spaceName: item.spaceName,
+                        subInfo: item.subInfo,
+                        moduleIcons: item.moduleIcons,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, i) => SizedBox(
+                    width: 10,
+                  ),
+                  itemCount: yesterdaySpaces.length,
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.45,
-                  height: 300,
+                  //height: 300,
                   decoration: BoxDecoration(
                       color: DefaultColorTheme.spaceCardBackgroundColor,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -55,10 +137,63 @@ class ActivityTimelineScreen extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                 ),
               ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+            ),*/
+class SpaceCardDTO {
+  final String spaceName;
+  final String lastUpdated;
+  final List<Icon> moduleIcons;
+  final String subInfo;
+  final String thumbnailImage;
+  SpaceCardDTO({
+    required this.lastUpdated,
+    required this.moduleIcons,
+    required this.spaceName,
+    required this.subInfo,
+    required this.thumbnailImage,
+  });
 }
+
+class ActivityDTO {
+  final String day;
+  final List<SpaceCardDTO> activities;
+  const ActivityDTO({
+    required this.activities,
+    required this.day,
+  });
+}
+
+List<SpaceCardDTO> yesterdaySpaces = [
+  SpaceCardDTO(
+    lastUpdated: 'Yesterday 20:25',
+    moduleIcons: [Icon(Icons.movie)],
+    spaceName: 'Watch Veep',
+    subInfo: 'Video feed from HBO',
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+  SpaceCardDTO(
+    lastUpdated: 'Yesterday 20:25',
+    moduleIcons: [Icon(Icons.movie)],
+    spaceName: 'Watch Veep',
+    subInfo: 'Video feed from HBO',
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+];
+
+List<SpaceCardDTO> todaySpaces = [
+  SpaceCardDTO(
+    lastUpdated: 'Updated just now',
+    spaceName: 'Review Inbox',
+    subInfo: '7 items from Mail, Messenger and Twitter',
+    moduleIcons: [
+      Icon(Icons.mail_outline),
+      Icon(Icons.messenger_rounded),
+      Icon(Icons.flaky_sharp),
+    ],
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  )
+];
+
+List<ActivityDTO> activities = [
+  ActivityDTO(activities: todaySpaces, day: 'Today'),
+  ActivityDTO(activities: yesterdaySpaces, day: 'Yesterday'),
+];
