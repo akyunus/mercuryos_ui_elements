@@ -36,7 +36,7 @@ class ActivityTimelineScreen extends StatelessWidget {
       BuildContext context, ActivityDTO dailyActivity) {
     //final dailyActivity = activities[i];
     return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.width * 0.28,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,9 +64,9 @@ class ActivityTimelineScreen extends StatelessWidget {
 
   Widget _spaceCardBuilder(BuildContext context, SpaceCardDTO item) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.4,
+      //width: MediaQuery.of(context).size.width * 0.4,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: SpaceTimelineCard(
           lastUpdated: item.lastUpdated,
           spaceName: item.spaceName,
@@ -199,10 +199,45 @@ List<SpaceCardDTO> todaySpaces = [
   )
 ];
 
+List<SpaceCardDTO> moreSpaces = [
+  SpaceCardDTO(
+    lastUpdated: 'Yesterday 20:25',
+    moduleIcons: [Icon(Icons.movie)],
+    spaceName: 'Watch Veep',
+    subInfo: 'Video feed from HBO',
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+  SpaceCardDTO(
+    lastUpdated: 'Updated just now',
+    spaceName: 'Review Inbox',
+    subInfo: '7 items from Mail, Messenger and Twitter',
+    moduleIcons: [
+      Icon(Icons.mail_outline),
+      Icon(Icons.messenger_rounded),
+      Icon(Icons.flaky_sharp),
+    ],
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+  SpaceCardDTO(
+    lastUpdated: 'Yesterday 20:25',
+    moduleIcons: [Icon(Icons.movie)],
+    spaceName: 'Watch Veep',
+    subInfo: 'Video feed from HBO',
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+  SpaceCardDTO(
+    lastUpdated: 'Yesterday 20:25',
+    moduleIcons: [Icon(Icons.movie)],
+    spaceName: 'Watch Veep',
+    subInfo: 'Video feed from HBO',
+    thumbnailImage: 'assets/ui-designs/module_map.png',
+  ),
+];
+
 List<ActivityDTO> activities = [
   ActivityDTO(activities: todaySpaces, day: 'Today'),
   ActivityDTO(activities: yesterdaySpaces, day: 'Yesterday'),
   ActivityDTO(activities: todaySpaces, day: '13 May 2021'),
   ActivityDTO(activities: todaySpaces, day: '12 May 2021'),
-  ActivityDTO(activities: todaySpaces, day: '11 May 2021'),
+  ActivityDTO(activities: moreSpaces, day: 'Last Month'),
 ];
