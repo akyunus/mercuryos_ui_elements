@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 /// gets children directy to the the Stack
 ///
 class KiriScreen extends StatelessWidget {
-  final List<Widget> children;
-  const KiriScreen({Key? key, this.children: const []}) : super(key: key);
+  final Widget child;
+  const KiriScreen({Key? key, this.child: const Text('')}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +15,16 @@ class KiriScreen extends StatelessWidget {
       DeviceOrientation.landscapeRight,
     ]);
     SystemChrome.setEnabledSystemUIOverlays([]);
-    children.insert(
-        0,
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(children: [
         Container(
           padding: const EdgeInsets.all(8),
           decoration: kiriDecorationBackgroundImage,
-        ));
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(children: children),
+        ),
+        child,
+      ]),
     );
   }
 }

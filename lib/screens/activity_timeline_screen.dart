@@ -8,30 +8,27 @@ class ActivityTimelineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KiriScreen(
-      children: [
-        LocusBar(
-          backgroundColor: DefaultColorTheme.locusBackgroundColordark,
-        ),
-        Positioned(
-          top: 50,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: activities.map((a) {
-                  return Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      child: _activitiesRowBuilder(context, a));
-                }).toList(),
-              ),
+      child: Column(
+        children: [
+          LocusBar(
+            backgroundColor: DefaultColorTheme.locusBackgroundColordark,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView.builder(
+                  itemCount: activities.length,
+                  itemBuilder: (context, i) {
+                    return _activitiesRowBuilder(context, activities[i]);
+                  }),
             ),
           ),
-        ),
-      ],
+          TextButton(
+            child: Text('Back < '),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
     );
   }
 
@@ -39,8 +36,10 @@ class ActivityTimelineScreen extends StatelessWidget {
       BuildContext context, ActivityDTO dailyActivity) {
     //final dailyActivity = activities[i];
     return Container(
-      //height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             dailyActivity.day,
@@ -49,10 +48,14 @@ class ActivityTimelineScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: dailyActivity.activities.map((e) {
-              return _spaceCardBuilder(context, e);
-            }).toList(),
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dailyActivity.activities.length,
+                itemBuilder: (context, i) {
+                  return _spaceCardBuilder(
+                      context, dailyActivity.activities[i]);
+                }),
           ),
         ],
       ),
@@ -61,12 +64,15 @@ class ActivityTimelineScreen extends StatelessWidget {
 
   Widget _spaceCardBuilder(BuildContext context, SpaceCardDTO item) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.50,
-      child: SpaceTimelineCard(
-        lastUpdated: item.lastUpdated,
-        spaceName: item.spaceName,
-        subInfo: item.subInfo,
-        moduleIcons: item.moduleIcons,
+      width: MediaQuery.of(context).size.width * 0.4,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SpaceTimelineCard(
+          lastUpdated: item.lastUpdated,
+          spaceName: item.spaceName,
+          subInfo: item.subInfo,
+          moduleIcons: item.moduleIcons,
+        ),
       ),
     );
   }
@@ -196,4 +202,7 @@ List<SpaceCardDTO> todaySpaces = [
 List<ActivityDTO> activities = [
   ActivityDTO(activities: todaySpaces, day: 'Today'),
   ActivityDTO(activities: yesterdaySpaces, day: 'Yesterday'),
+  ActivityDTO(activities: todaySpaces, day: '13 May 2021'),
+  ActivityDTO(activities: todaySpaces, day: '12 May 2021'),
+  ActivityDTO(activities: todaySpaces, day: '11 May 2021'),
 ];

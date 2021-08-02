@@ -8,9 +8,7 @@ class SpaceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KiriScreen(
-      children: [
-        Space(flows: []),
-      ],
+      child: Space(flows: []),
     );
   }
 }

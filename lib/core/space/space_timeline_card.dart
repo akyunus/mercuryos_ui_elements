@@ -28,6 +28,7 @@ class SpaceTimelineCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Flex(
+              mainAxisSize: MainAxisSize.min,
               direction: Axis.horizontal,
               children: [
                 Flexible(
