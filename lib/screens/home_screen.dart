@@ -33,13 +33,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(child: Container()),
-          Positioned(
-            bottom: 10,
-            left: 0,
-            right: 0,
+          Align(
+            alignment: Alignment.bottomLeft,
             child: InkWell(
               onTap: () {
-                print('TimeLine!');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
